@@ -14,6 +14,7 @@ namespace Editor_v0_1
 {
     public class CEnemyTemplateList
     {
+        private readonly ISerializer<List<CEnemyTemplate>> _serializer = new JsonEnemySaver();
         public List<CEnemyTemplate> Enemies { get; set; } = new List<CEnemyTemplate>();
 
         public CEnemyTemplateList() 
@@ -73,30 +74,26 @@ namespace Editor_v0_1
 
             return names;
         }
-
-        public void SaveToFile()
+        public void SaveToJson()
         {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Converters = { new EnemyTemplateConverter() }  // Добавляем наш конвертер
-            };
+            string path = "enemies.json";
 
-            string json = JsonSerializer.Serialize(Enemies, options);
-            File.WriteAllText("enemies.json", json);
+            _serializer.Save(Enemies, path);
         }
 
-        public void LoadFromFile(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                var options = new JsonSerializerOptions
-                {
-                    Converters = { new EnemyTemplateConverter() }
-                };
 
-                string json = File.ReadAllText(filePath);
-                Enemies = JsonSerializer.Deserialize<List<CEnemyTemplate>>(json, options) ?? new List<CEnemyTemplate>();
+        public void LoadFromJson()
+        {
+            string path = "enemies.json";
+
+            if (File.Exists(path))
+            {
+                Enemies = _serializer.Load(path);
+            }
+            else
+            {
+                // Создать файл по умолчанию, если не существует
+                _serializer.Save(new List<CEnemyTemplate>(), path);
             }
         }
 

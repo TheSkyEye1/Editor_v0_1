@@ -143,12 +143,12 @@ namespace Editor_v0_1
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-            enemies.SaveToFile();
+            enemies.SaveToJson();
         }
 
         private void Load_Button_Click(object sender, RoutedEventArgs e)
         {
-            enemies.LoadFromFile("null");
+            enemies.LoadFromJson();
         }
 
         private void rb_NormalType_Checked(object sender, RoutedEventArgs e)
