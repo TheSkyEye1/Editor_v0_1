@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Editor_v0_1
 {
-    public class JsonEnemySaver: ISerializer<List<CEnemyTemplate>>
+    public class JsonEnemySaver: ISaveList<List<CEnemyTemplate>>
     {
         private readonly JsonSerializerOptions _options;
         public JsonEnemySaver()

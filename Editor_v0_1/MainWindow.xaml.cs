@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -87,7 +88,7 @@ namespace Editor_v0_1
 
             if(type == "Normal")
             {
-                CEnemyTemplate newEnemy = new CEnemyTemplate { Name = name, BaseGold = baseGold, BaseLife = baseLife, GoldModifier = goldModifier, IconName = iconName, LifeModifier = lifeModifier, SpawnChance = spawnChance };
+                CNormalEnemyTemplate newEnemy = new CNormalEnemyTemplate { Name = name, BaseGold = baseGold, BaseLife = baseLife, GoldModifier = goldModifier, IconName = iconName, LifeModifier = lifeModifier, SpawnChance = spawnChance };
                 string result = enemies.addEnemy(newEnemy);
 
                 if (result == "added")
@@ -95,39 +96,43 @@ namespace Editor_v0_1
             }
             if(type == "Armored")
             {
-                int armor = int.Parse(tb_enemyArmor.Text, System.Globalization.CultureInfo.InvariantCulture);
+                double armor = double.Parse(tb_AdditionalParam.Text, System.Globalization.CultureInfo.InvariantCulture);
                 CArmoredEnemyTemplate newEnemy = new CArmoredEnemyTemplate { Name = name, BaseGold = baseGold, BaseLife = baseLife, GoldModifier = goldModifier, IconName = iconName, LifeModifier = lifeModifier, SpawnChance = spawnChance, Armor = armor};
                 string result = enemies.addEnemy(newEnemy);
 
                 if (result == "added")
                     lb_enemy_list.Items.Add(name);
             }
+            if (type == "Agile")
+            {
+                double miss = double.Parse(tb_AdditionalParam.Text, System.Globalization.CultureInfo.InvariantCulture);
+                CAgileEnemyTemplate newEnemy = new CAgileEnemyTemplate { Name = name, BaseGold = baseGold, BaseLife = baseLife, GoldModifier = goldModifier, IconName = iconName, LifeModifier = lifeModifier, SpawnChance = spawnChance, Miss = miss };
+                string result = enemies.addEnemy(newEnemy);
 
-            
-
+                if (result == "added")
+                    lb_enemy_list.Items.Add(name);
+            }
         }
 
         private void lb_enemy_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lb_enemy_list.SelectedIndex > - 1)
             {
+                string cname = TypeDescriptor.GetClassName(et);
                 CEnemyTemplate et = enemies.getEnemyByIndex(lb_enemy_list.SelectedIndex);
 
                 if (et != null)
                 {
                     enemy_icon.Children.Clear();
                     enemy_icon.Children.Add(iconList.findByName(et.IconName).CloneIcon());
-
                     lb_iconName.Content = et.IconName;
                     tb_enemyName.Text = et.Name;
-
                     tb_enemyBaseLife.Text = et.LifeModifier.ToString();
                     tb_enemyGoldModifier.Text = et.GoldModifier.ToString();
-
                     tb_enemyBaseGold.Text = et.BaseGold.ToString();
                     tb_enemyGoldModifier.Text = et.GoldModifier.ToString();
-
                     tb_enemySpawnChance.Text = et.SpawnChance.ToString();
+                    
                 }
             }
         }
@@ -149,6 +154,10 @@ namespace Editor_v0_1
         private void Load_Button_Click(object sender, RoutedEventArgs e)
         {
             enemies.LoadFromJson();
+            foreach(string name in enemies.getListOfEnemyNames())
+            {
+                lb_enemy_list.Items.Add(name);
+            }
         }
 
         private void rb_NormalType_Checked(object sender, RoutedEventArgs e)
@@ -158,7 +167,14 @@ namespace Editor_v0_1
 
         private void rb_ArmoredType_Checked(object sender, RoutedEventArgs e)
         {
+            lb_addcont.Content = "Armor:";
             type = "Armored";
+        }
+
+        private void rb_AgileTpe_Checked(object sender, RoutedEventArgs e)
+        {
+            lb_addcont.Content = "Miss chance:";
+            type = "Agile";
         }
     }
 }

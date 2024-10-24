@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Editor_v0_1
 {
-    public class CEnemyTemplate
+    public abstract class CEnemyTemplate
     {
         string name;
         string iconName;
@@ -61,14 +61,25 @@ namespace Editor_v0_1
         }
     }
 
+    public class CNormalEnemyTemplate : CEnemyTemplate { }
 
     public class CArmoredEnemyTemplate : CEnemyTemplate
     {
-        int armor;
-        public int Armor
+        double armor;
+        public double Armor
         {
             get { return armor; }
-            set { if (value > 0) armor = value; else armor = 0; }
+            set { if (value > 0) armor = value; else armor = 25; }
+        }
+    }
+
+    public class CAgileEnemyTemplate : CEnemyTemplate
+    {
+        double missChance;
+        public double Miss
+        {
+            get { return missChance; }
+            set { if (value > 0) missChance = value; else missChance = 25; }
         }
     }
 }

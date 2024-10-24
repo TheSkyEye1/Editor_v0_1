@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Editor_v0_1
 {
-    public interface ISerializer<T>
+    public interface ISaveList<T>
     {
         T Load(string path);
         void Save(T data, string path);

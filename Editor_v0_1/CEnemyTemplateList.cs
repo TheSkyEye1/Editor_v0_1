@@ -14,7 +14,7 @@ namespace Editor_v0_1
 {
     public class CEnemyTemplateList
     {
-        private readonly ISerializer<List<CEnemyTemplate>> _serializer = new JsonEnemySaver();
+        private readonly ISaveList<List<CEnemyTemplate>> _serializer = new JsonEnemySaver();
         public List<CEnemyTemplate> Enemies { get; set; } = new List<CEnemyTemplate>();
 
         public CEnemyTemplateList() 
@@ -84,7 +84,7 @@ namespace Editor_v0_1
 
         public void LoadFromJson()
         {
-            string path = "enemies.json";
+            string path = @"C:\Users\golov\source\repos\Editor_v0_1\Editor_v0_1\bin\Debug\enemies.json";
 
             if (File.Exists(path))
             {

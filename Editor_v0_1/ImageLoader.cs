@@ -58,7 +58,7 @@ namespace Editor_v0_1
             }
 
             string folder = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + path;//@"\Resources\Monsters\";
-            string filter = "*.png";
+            string filter = "*.jpg";
             string[] files = Directory.GetFiles(folder, filter);
 
             foreach (string file in files)

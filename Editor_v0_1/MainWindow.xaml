@@ -33,10 +33,11 @@
         <Button Content="Add" HorizontalAlignment="Left" Height="30" Margin="350,336,0,0" VerticalAlignment="Top" Width="95" Click="Add_Button_Click"/>
         <Button Content="Save" HorizontalAlignment="Left" Margin="11,336,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="Save_Button_Click"/>
         <Button Content="Load" HorizontalAlignment="Left" Height="30" Margin="81,336,0,0" VerticalAlignment="Top" Width="60" Click="Load_Button_Click"/>
-        <TextBox x:Name="tb_enemyArmor" HorizontalAlignment="Left" Height="30" Margin="145,404,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <Label Content="Armor:" HorizontalAlignment="Left" Height="30" Margin="145,374,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="tb_AdditionalParam" HorizontalAlignment="Left" Height="30" Margin="145,404,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lb_addcont" Content="Armor:" HorizontalAlignment="Left" Height="30" Margin="145,374,0,0" VerticalAlignment="Top" Width="200"/>
         <RadioButton x:Name="rb_NormalType" Content="Normal" HorizontalAlignment="Left" Margin="352,378,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="EmenyType" Checked="rb_NormalType_Checked"/>
         <RadioButton x:Name="rb_ArmoredType" Content="Armored" HorizontalAlignment="Left" Margin="352,396,0,0" VerticalAlignment="Top" IsChecked="False" GroupName="EmenyType" Checked="rb_ArmoredType_Checked"/>
+        <RadioButton x:Name="rb_AgileTpe" Content="Agile" HorizontalAlignment="Left" Margin="352,412,0,0" VerticalAlignment="Top" IsChecked="False" GroupName="EmenyType" Checked="rb_AgileTpe_Checked"/>
 
     </Grid>
 </Window>

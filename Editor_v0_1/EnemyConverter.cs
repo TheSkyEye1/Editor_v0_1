@@ -18,8 +18,10 @@ public class EnemyTemplateConverter : JsonConverter<CEnemyTemplate>
             {
                 case "CArmoredEnemyTemplate":
                     return JsonSerializer.Deserialize<CArmoredEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
-                case "CEnemyTemplate":
-                    return JsonSerializer.Deserialize<CEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
+                case "CNormalEnemyTemplate":
+                    return JsonSerializer.Deserialize<CNormalEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
+                case "CAgileEnemyTemplate":
+                    return JsonSerializer.Deserialize<CAgileEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
                 default:
                     throw new NotSupportedException($"Unknown type: {type}");
             }
@@ -34,8 +36,8 @@ public class EnemyTemplateConverter : JsonConverter<CEnemyTemplate>
     {
         string type = value.GetType().Name;  // Определяем тип: CEnemyTemplate, CArmoredEnemyTemplate и т. д.
 
-        //ТУТ ПРОИСХОДИТ ОБСЕР ПРЕПОДАВАТЕЛЯ КОМПИЛИРУЮЩЕГО КОД В ГОЛОВЕ
-        string json = JsonSerializer.Serialize(value, value.GetType(), options);  // Сериализуем объект
+        string json = JsonSerializer.Serialize(value, value.GetType(), options);
+
         var jsonDoc = JsonDocument.Parse(json);
 
         try
